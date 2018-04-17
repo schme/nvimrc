@@ -18,17 +18,31 @@ Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'majutsushi/tagbar'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
 
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
 
-colorscheme Apprentice
-
-:cd $HOME
+set background=dark
+colorscheme papercolor
 
 let mapleader="\<SPACE>"
+" --------------------------------------
+"  Tagbar
+" --------------------------------------
+nnoremap <c-q> :TagbarToggle<cr>
+" --------------------------------------
+"  Ultisnips
+" --------------------------------------
+"let g:UltiSnipsExpandTrigger="<c-tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+"let g:UltiSnipsEditSplit="vertical"
 " --------------------------------------
 "  YouCompleteMe
 " --------------------------------------
@@ -36,17 +50,20 @@ set encoding=utf-8
 let g:ycm_confirm_extra_conf = 1
 let g:ycm_extra_conf_globlist = ['C:/Users/kaspe/.nvim/*']
 let g:ycm_filepath_completion_use_working_dir = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 
 " --------------------------------------
 " CtrlP
 " --------------------------------------
 "  Open file menu
-nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>o :CtrlP<cr>
 " Open buffer menu
-nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <Leader>b :CtrlPBuffer<cr>
 " Open most recently used files
-nnoremap <Leader>f :CtrlPMRUFiles<CR>
+nnoremap <Leader>f :CtrlPMRUFiles<cr>
+" Search tags
+nnoremap <Leader>, :CtrlPTag<cr>
 " --------------------------------------
 " vim-airline
 " --------------------------------------
@@ -103,7 +120,6 @@ match ExtraWhitespace /\s\+$\|\t/
 
 set ignorecase          " Make searching case insensitive
 set smartcase           " ... unless the query has capital letters.
-set gdefault            " Use 'g' flag by default with :s/foo/bar/.
 set smartindent
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
@@ -111,12 +127,22 @@ if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 endif
 
-nnoremap Q @q   " Use Q to execute default register.
+" --------------------------------------
+"  Tag things
+" --------------------------------------
+"  Need to remap due to finnish layout
+nnoremap <c-i> <c-]>
 
 " Clear trailing whitespaces
-:nnoremap <silent> <F6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+nnoremap <silent> <F6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
+" Get ctags and dump it in the current directory
+nnoremap <silent> <F7> :!ctags -R .<cr><cr>
+
+" Save
 nnoremap <c-s> <esc>:w<CR>
+
+" Esc (is there really no better alternative?!?!)
 imap kj <esc>
 
 " config autoreload

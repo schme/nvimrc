@@ -133,6 +133,13 @@ endif
 "  Need to remap due to finnish layout
 nnoremap <c-i> <c-]>
 
+" --------------------------------------
+"  Misc bindings
+" --------------------------------------
+
+" Map $ to ¤ in normal mode for easier life
+"nnoremap $ ¤
+
 " Clear trailing whitespaces
 nnoremap <silent> <F6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
